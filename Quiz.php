@@ -42,16 +42,21 @@
     </p>
 
     <section id="zs" class="container">
+      <?php 
+      if ((isset($_SESSION['LOGGEDUSER'])) && $_SESSION['LOGGEDUSER'] == "root") {
+        echo "<a href='?p=upload' class='btn btn-primary btn-block mt-2 mb-4'> Create a Post </a>";
+      }
+      ?>
+
       <div class="row mb-4">
         <?php foreach ($quizzes as $quiz): ?>
         <div class="col-12 col-md-3">
           <div class="card">
-            <img class="card-img-top" src="https://1.bp.blogspot.com/-HTSetBLu4ks/XYI9AABvjMI/AAAAAAAAA5M/pkTihvta2S4QaXsjXVveM3hl8fJ9UL7YQCLcBGAsYHQ/s1600/thumbnail---asj.jpg" alt="Card image cap">
+            <img class="card-img-top" src="<?= $quiz['quiz_thumbnail'] ?>" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title"> <?= $quiz['quiz_title'] ?> </h5>
               <p class="card-text"> <?= $quiz['quiz_description'] ?> </p>
-              <a href="?p=lesson&c=<?= $quiz['quiz_id'] ?>" class="btn btn-outline-primary mt-4"> Lesson </a>
-              <a href="?p=startQuiz&c=<?= $quiz['quiz_id'] ?>" class="btn btn-primary mt-4"> Quiz </a>
+              <a href="?p=lesson&c=<?= $quiz['quiz_id'] ?>" class="btn btn-outline-primary mt-4"> Enroll this Lesson </a>
             </div>
           </div>
         </div>

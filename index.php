@@ -29,6 +29,10 @@ function I($src = "") {
     return "Include/" . $src . ".php";
 }
 
+function LOAD_LIB($name = "") {
+    require_once("Libs/" . $name . ".php");
+}
+
 session_start();
 define('BASE_URL', 'http://localhost/');
 
@@ -43,7 +47,9 @@ $route = array(
     "register"  => "register",
     "login"     => "login",
     "logout"    => "logout",
-    "work"      => "work"
+    "work"      => "work",
+    "upload"    => "upload",
+    "create"    => "create"
 );
 
 if (isset($_GET['p']) && isset($route[$_GET['p']])) {

@@ -3,7 +3,7 @@
 $con = array();
 
 $con['hostname'] = "localhost";
-$con['username'] = "admin";
+$con['username'] = "userAdmin";
 $con['password'] = "1234";
 $con['database'] = "acpnepur.sch.id";
 

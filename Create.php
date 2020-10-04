@@ -22,27 +22,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * End license text. 
-*/
+ */
+?>
 
-require_once("Include/DB.php");
-
-if (isset($_GET['c'])) {
-  $code = $_GET['c'];
-  $num  = $_GET['n'] + 1; 
-
-  $stmt = $db->prepare("SELECT * FROM `questions` WHERE quiz_id=:code AND question_number=:number");
-  $stmt->bindParam(":code", $code);
-  $stmt->bindParam(":number", $num);
-  $stmt->execute();
-
-  $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  $return = array(
-    "q" => $result['question'],
-    "a" => explode('; ', $result['answers'])
-  );
- 
-  exit(json_encode($return));
-} else {
-  exit("code_404");
-}
+<div class="container my-4">
+  <textarea name="editor1"></textarea>
+  <script>
+    CKEDITOR.replace( 'editor1' );
+  </script>
+</div>

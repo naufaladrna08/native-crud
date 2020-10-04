@@ -1,4 +1,4 @@
-<section id="landing">
+<section id="landing" style="padding: 8em 0;">
   <div class="container">
     <h1 class="display-4"> Teknik Komputer dan Jaringan </h1>
     <p class="lead">
