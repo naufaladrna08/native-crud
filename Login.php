@@ -63,7 +63,7 @@
 
   <h1 class="mt-4"> Login </h1>
 
-  <form method="POST" action="<?= BASE_URL ?>web/index.php?p=login">
+  <form method="POST" action="<?= BASE_URL ?>index.php?p=login">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" class="form-control" id="username" name="username" placeholder="Username">

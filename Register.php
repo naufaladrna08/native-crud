@@ -43,7 +43,7 @@
 
   <h1 class="mt-4"> Register </h1>
 
-  <form method="POST" action="<?= BASE_URL ?>web/index.php?p=register">
+  <form method="POST" action="<?= BASE_URL ?>index.php?p=register">
     <div class="form-group">
       <label for="exampleInputEmail1">Username</label>
       <input type="text" class="form-control" name="username" placeholder="Username">
