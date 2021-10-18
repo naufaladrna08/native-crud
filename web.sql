@@ -1,11 +1,3 @@
-USE `acpnepur.sch.id`;
-
--- Hapus dan buat table
-DROP TABLE `quizzes`; 
-DROP TABLE `questions`;
-DROP TABLE `result`;
-DROP TABLE `users`;
-
 CREATE TABLE IF NOT EXISTS users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
@@ -38,6 +30,3 @@ CREATE TABLE IF NOT EXISTS questions (
     correct_index INT NOT NULL,
     quiz_id INT
 ) ENGINE=InnoDB;
-
-SHOW TABLES;
-SELECT * FROM questions
