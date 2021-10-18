@@ -34,7 +34,7 @@ function LOAD_LIB($name = "") {
 }
 
 session_start();
-define('BASE_URL', 'http://localhost/');
+define('BASE_URL', 'http://localhost/tkjconnect/');
 
 /* THIS IS THE ACTUAL REQUIREMENTS */
 require_once(I("DB"));
