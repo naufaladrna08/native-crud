@@ -42,8 +42,8 @@ class App {
 
   /* URL Parsing */
   public function url_parser() {
-    if (isset($_GET['url'])) {
-      $url = rtrim($_GET['url'], '/');
+    if (isset($_GET['p'])) {
+      $url = rtrim($_GET['p'], '/');
       $url = explode('/', $url);
       return $url;
     }
