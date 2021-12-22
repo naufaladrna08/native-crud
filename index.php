@@ -13,7 +13,7 @@ function LOAD_LIB($name = "") {
 }
 
 session_start();
-define('BASE_URL', 'http://localhost/tkjconnect/');
+define('BASE_URL',  "http://" . $_SERVER['SERVER_NAME'] . ':' . $_SERVER["SERVER_PORT"]. '/');
 require_once(I("DB"));
 require_once('./vs-router.php');
 
