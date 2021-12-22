@@ -4,17 +4,10 @@
  * See LICENSE
 */
 
-function I($src = "") {
-  return "Include/" . $src . ".php";
-}
-
-function LOAD_LIB($name = "") {
-  require_once("Libs/" . $name . ".php");
-}
-
 session_start();
 define('BASE_URL',  "http://" . $_SERVER['SERVER_NAME'] . ':' . $_SERVER["SERVER_PORT"]. '/');
-require_once(I("DB"));
-require_once('./vs-router.php');
+require_once('Include/DB.php');
+require_once('Include/Router.php');
+require_once('Include/Controller.php');
 
 $app = new App("Controllers/");
