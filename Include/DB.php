@@ -3,9 +3,9 @@
 $con = array();
 
 $con['hostname'] = "localhost";
-$con['username'] = "userAdmin";
+$con['username'] = "admin";
 $con['password'] = "1234";
-$con['database'] = "acpnepur.sch.id";
+$con['database'] = "tkj";
 
 try {
   $db = new PDO("mysql:host=$con[hostname];dbname=$con[database]", $con['username'], $con['password']);
