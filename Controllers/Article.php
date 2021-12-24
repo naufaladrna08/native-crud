@@ -26,12 +26,14 @@ class Article extends Controller {
             aa.title,
             aa.description,
             aa.category,
+            aa.created_at,
             bb.username
           FROM
             posts aa
           LEFT JOIN users bb ON aa.uid = bb.user_id
           WHERE 
             aa.id = :id
+          ORDER BY aa.created_at DESC
         ");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -65,15 +67,19 @@ class Article extends Controller {
     $body = $_POST;
 
     try {
+      $current_date = date("Y-m-d H:i:s");
       $category = "1";
+      
       $stmt = $db->prepare("
-        INSERT INTO posts (id, uid, title, description, category)
-        VALUES (NULL, :uid, :title, :description, :category)
+        INSERT INTO posts (id, uid, title, description, category, created_by, created_at)
+        VALUES (NULL, :uid, :title, :description, :category, :created_by, :created_at)
       ");
-      $stmt->bindParam(':uid', $_SESSION['id']);
+      $stmt->bindParam(':uid', $_SESSION['LOGGEDUSER'][0]['user_id']);
       $stmt->bindParam(':title', $_POST['title']);
       $stmt->bindParam(':description', $_POST['description']);
       $stmt->bindParam(':category', $category);
+      $stmt->bindParam(':created_by', $_SESSION['LOGGEDUSER'][0]['user_id']);
+      $stmt->bindParam(':created_at', $current_date);
       
       if ($stmt->execute()) {
         $data = self::Response(200, 'success', 'Data berhasil dibuat', $body);

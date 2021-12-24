@@ -36,10 +36,12 @@ class Home extends Controller {
           aa.title,
           aa.description,
           aa.category,
+          aa.created_at,
           bb.username
         FROM
           posts aa
         LEFT JOIN users bb ON aa.uid = bb.user_id
+        ORDER BY aa.created_at DESC
       ");
       $stmt->execute();
 
@@ -56,6 +58,12 @@ class Home extends Controller {
           $cat->execute();
           $cats = $cat->fetchAll(\PDO::FETCH_ASSOC);
 
+          if (strlen($v['description']) > 255) {
+            $description = substr($v['description'], 0, 255) . ' <a href="'. BASE_URL .'index.php?p=article/'. $v['id'] .'"> <badge class="badge bg-primary ml-2"> Continue Reading </badge> </a>';
+          } else {
+            $description = $v['description'];
+          }
+
           foreach ($cats as $_c) {
             $_cats .= '<span class="badge rounded-pill bg-primary mr-2">'. $_c['category'] .'</span>';
           }
@@ -69,12 +77,14 @@ class Home extends Controller {
                 <h5> <a href="'. BASE_URL .'index.php?p=article/'. $v['id'] .'"> '. $v['title'] .' </a> </h5>
                 <div class="mb-3"> '. $_cats .'  </div>
                 <p class="lead">
-                  '. $v['description'] .'
+                  '. $description .'
                 </p>
 
                 <a href="'. BASE_URL .'index.php?p=profile/'. $v['username'] .'">
                   <i class="fas fa-user mr-4"> </i> '. $v['username'] .'
                 </a>
+
+                <div class="created-by"> <i class="fas fa-clock ml-2"></i> '. self::time_elapsed_string($v['created_at']) .' </div>
               </div>
             </div>
           ';
