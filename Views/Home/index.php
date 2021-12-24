@@ -13,7 +13,7 @@
 
 <style>
   #root {
-    padding: 4em 0;
+    padding: 2em 0;
   }
 
   body {
