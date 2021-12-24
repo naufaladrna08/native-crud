@@ -10,6 +10,9 @@
           <a class="nav-link" href="<?= BASE_URL ?>index.php?p=home">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="<?= BASE_URL ?>index.php?p=article/create">Create Article</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= BASE_URL ?>index.php?p=profile">Profile</a>
         </li>
         <li class="nav-item">
