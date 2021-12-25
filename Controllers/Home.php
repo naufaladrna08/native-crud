@@ -41,6 +41,7 @@ class Home extends Controller {
         FROM
           posts aa
         LEFT JOIN users bb ON aa.uid = bb.user_id
+        WHERE is_active = 1
         ORDER BY aa.created_at DESC
       ");
       $stmt->execute();
