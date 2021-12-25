@@ -1,7 +1,7 @@
 <div id="root">
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 content">
         <h1> <?= $data['title'] ?> </h1>
         <small> by <?= $data['username'] ?> on <?= $data['created_at'] ?> </small>
 
@@ -9,8 +9,8 @@
         if ($data['username'] == $_SESSION['LOGGEDUSER'][0]['username']) {
         ?>
         <nav class="mt-4">
-          <a href="<?= BASE_URL ?>index.php?p=article/update/<?= $data['id'] ?>" class="btn btn-primary btn-sm"> Update </a>
-          <a href="<?= BASE_URL ?>index.php?p=article/adelete/<?= $data['id'] ?>" class="btn btn-danger btn-sm"> Delete </a>
+          <button id="update-button" class="btn btn-primary btn-sm"> Update </a>
+          <button id="delete-button" class="btn btn-danger btn-sm mx-2"> Delete </a>
         </nav>
         <?php 
         }
@@ -37,3 +37,23 @@
     background: #ebebeb;
   }
 </style>
+
+<script>
+  $(document).ready(() => {
+    // $('update-button')
+    $('#delete-button').on('click', (e) => {
+      Swal.fire({
+        title: 'Are you sure to delete this article?',
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        cancelButtonText: 'Dont save'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            
+          })
+        }
+      })
+    })
+  })
+</script>

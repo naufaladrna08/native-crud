@@ -2,3 +2,7 @@
   color: rgb(66, 66, 66);
   display: inline-block;
 }
+
+.content {
+  font-family: 'Raleway', 'Mochiy Pop One', sans-serif;
+}

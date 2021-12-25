@@ -73,7 +73,7 @@ class Home extends Controller {
               <div class="col-2 col-sm-2 col-md-1">
                 <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="48" height="48" class="avatar">
               </div>
-              <div class="col-10 col-sm-10 col-md-11">
+              <div class="col-10 col-sm-10 col-md-11 content">
                 <h5> <a href="'. BASE_URL .'index.php?p=article/'. $v['id'] .'"> '. $v['title'] .' </a> </h5>
                 <div class="mb-3"> '. $_cats .'  </div>
                 <p class="lead">
