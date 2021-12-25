@@ -56,9 +56,46 @@ class Article extends Controller {
     $this->render('create');
   }
 
-  public function update() {
-    $this->render('update');
+  public function update($id = null) {
+    global $db;
+    $error = null;
+    $data = null;
 
+    try {
+      $stmt = $db->prepare("
+        SELECT
+          aa.id,
+          aa.uid,
+          aa.title,
+          aa.description,
+          aa.category,
+          aa.created_at,
+          bb.username
+        FROM
+          posts aa
+        LEFT JOIN users bb ON aa.uid = bb.user_id
+        WHERE 
+          aa.id = :id
+        ORDER BY aa.created_at DESC
+      ");
+      $stmt->bindParam(":id", $id);
+      $stmt->execute();
+
+      if ($stmt->rowCount() > 0) {
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
+
+        if ($data['uid'] != $_SESSION['LOGGEDUSER'][0]['user_id']) {
+          header("Location: " . BASE_URL . "index.php?p=home");
+        }
+      }
+    } catch (PDOException $e) {
+      $error = $e->getMessage();
+    }
+
+    $this->render('update', [
+      'error' => $error,
+      'data' => $data
+    ]);
   }
 
   public function acreate() {
@@ -96,10 +133,60 @@ class Article extends Controller {
   }
 
   public function aupdate() {
+    global $db;
+    $data = [];
 
+    try {
+      $stmt = $db->prepare("
+        UPDATE posts SET title = :title, description = :description
+        WHERE id = :id
+      ");
+      $stmt->bindParam(':id', $_POST['id']);
+      $stmt->bindParam(':title', $_POST['title']);
+      $stmt->bindParam(':description', $_POST['description']);
+
+      if ($stmt->execute()) {
+        $data = self::Response('200', 'Success', 'Data berhasil disimpan', null);
+      } else {
+        $data = self::Response('404', 'Failed', 'Data tidak ditemukan', null);
+      }
+
+    } catch (PDOException $e) {
+        $data = self::Response('500', 'Failed', 'Internal Server Error', $e->getMessage());
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    return $this->json($data);
   }
 
   public function adelete() {
+    global $db;
+    $data = [];
 
+    $id = $_POST['id'];
+    $uid = $_POST['uid'];
+
+    if ($uid != $_SESSION['LOGGEDUSER'][0]['user_id']) {
+      header("Location: " . BASE_URL . "index.php?p=home");
+    }
+
+    try {
+      $stmt = $db->prepare("
+        UPDATE posts SET is_active=0 WHERE id=:id
+      ");
+      $stmt->bindParam(':id', $id);
+
+      if ($stmt->execute()) {
+        $data = self::Response('200', 'Success', 'Data berhasil disimpan', null);
+      } else {
+        $data = self::Response('404', 'Failed', 'Data tidak ditemukan', null);
+      }
+
+    } catch (PDOException $e) {
+        $data = self::Response('500', 'Failed', 'Internal Server Error', $e->getMessage());
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    return $this->json($data);
   }
 }

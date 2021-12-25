@@ -40,17 +40,36 @@
 
 <script>
   $(document).ready(() => {
-    // $('update-button')
+    $('#update-button').on('click', (e) => {
+      document.location.href = "<?= BASE_URL ?>index.php?p=article/update/<?= $data['id'] ?>"
+    })
+
     $('#delete-button').on('click', (e) => {
       Swal.fire({
         title: 'Are you sure to delete this article?',
         showCancelButton: true,
-        confirmButtonText: 'Save',
-        cancelButtonText: 'Dont save'
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel'
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-            
+            url: "<?= BASE_URL ?>index.php?p=article/adelete",
+            method: "POST",
+            dataType: "JSON",
+            data: {
+              id: "<?= $data['id'] ?>",
+              uid: "<?= $data['uid'] ?>"
+            },
+            beforeSend: () => {
+              Swal.showLoading()
+            },
+            success: (resp) => {
+              Swal.close()
+
+              if (resp.code == 200) {
+                document.location.href = "<?= BASE_URL ?>index.php?p=home"
+              }
+            }
           })
         }
       })
