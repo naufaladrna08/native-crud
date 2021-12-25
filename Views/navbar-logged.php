@@ -16,6 +16,9 @@
           <a class="nav-link" href="<?= BASE_URL ?>index.php?p=profile">Profile</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="<?= BASE_URL ?>Views/Quiz/index.html">Quiz (Beta)</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= BASE_URL ?>index.php?p=home/logout">Logout</a>
         </li>
     </div>
